@@ -17,7 +17,7 @@ from sklearn.preprocessing import LabelEncoder
 # ===============================
 
 df = pd.read_csv(
-    r"D:\DATA_ANALYST\FULL_STACK_FROJECT\Stock Market Prediction\stock_market_clean_dataset_with_Feature_Eng\nse_prices.csv"
+    r"stock_market_clean_dataset_with_Feature_Eng\nse_prices.csv"
 )
 
 print("Dataset Loaded")
@@ -127,12 +127,12 @@ print("R2 Score:", round(r2, 4))
 
 joblib.dump(
     model,
-    r"D:\DATA_ANALYST\FULL_STACK_FROJECT\Stock Market Prediction\ML Model\stock_model.pkl"
+    r"ML Model\stock_model.pkl"
 )
 
 joblib.dump(
     encoder,
-    r"D:\DATA_ANALYST\FULL_STACK_FROJECT\Stock Market Prediction\ML Model\company_encoder.pkl"
+    r"ML Model\company_encoder.pkl"
 )
 
 
