@@ -31,7 +31,7 @@ DATA_PATH = os.path.join(
 app = FastAPI(title="Stock Market Prediction API")
 
 # ===============================
-# ENABLE CORS (frontend connect)
+# ENABLE CORS
 # ===============================
 
 app.add_middleware(
@@ -69,15 +69,29 @@ try:
         DATA_PATH,
         encoding="utf-8",
         engine="python",
-        on_bad_lines="skip"
+        on_bad_lines="skip",
     )
 
-    # FIX DATE FORMAT (IMPORTANT)
+    # ✅ FIX 1: Remove wrong header row
+    df = df[df["company"] != "company"]
+
+    # ✅ FIX 2: Clean company column
+    df["company"] = df["company"].astype(str).str.strip().str.upper()
+
+    # ✅ FIX 3: Convert numeric safely
+    numeric_cols = ["open", "high", "low", "close"]
+
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # ✅ FIX 4: Fix date format
     df["trade_date"] = pd.to_datetime(
         df["trade_date"],
         dayfirst=True,
         errors="coerce"
     )
+
+    df.dropna(inplace=True)
 
     df = df.sort_values(["company", "trade_date"])
 
@@ -85,7 +99,12 @@ try:
     # FEATURE ENGINEERING
     # ===============================
 
-    df["company_encoded"] = encoder.transform(df["company"])
+    # ✅ FIX 5: Safe encoding
+    df["company_encoded"] = df["company"].apply(
+        lambda x: encoder.transform([x])[0] if x in encoder.classes_ else None
+    )
+
+    df.dropna(subset=["company_encoded"], inplace=True)
 
     df["prev_close"] = df.groupby("company")["close"].shift(1)
 
@@ -145,6 +164,8 @@ def get_companies():
 @app.get("/latest/{company}")
 def get_latest(company: str):
 
+    company = company.strip().upper()
+
     if df is None:
         return {"error": "Dataset not loaded"}
 
@@ -174,7 +195,10 @@ def predict(data: dict):
     if df is None or model is None:
         return {"error": "Model or dataset not loaded"}
 
-    company = data.get("company")
+    company = data.get("company", "").strip().upper()
+
+    if company not in encoder.classes_:
+        return {"error": "Company not in trained model"}
 
     company_data = df[df["company"] == company]
 
@@ -183,17 +207,22 @@ def predict(data: dict):
 
     latest = company_data.iloc[-1]
 
+    open_price = float(data.get("open"))
+    high_price = float(data.get("high"))
+    low_price = float(data.get("low"))
+    close_price = float(data.get("close"))
+
     input_df = pd.DataFrame([{
 
         "company_encoded": latest["company_encoded"],
 
-        "open": float(data.get("open")),
+        "open": open_price,
 
-        "high": float(data.get("high")),
+        "high": high_price,
 
-        "low": float(data.get("low")),
+        "low": low_price,
 
-        "close": float(data.get("close")),
+        "close": close_price,
 
         "prev_close": latest["prev_close"],
 
@@ -201,16 +230,16 @@ def predict(data: dict):
 
         "ma_10": latest["ma_10"],
 
-        "volatility": float(data.get("high")) - float(data.get("low"))
+        "volatility": high_price - low_price
 
     }])
 
-    prediction = model.predict(input_df)[0]
+    prediction = float(model.predict(input_df)[0])
 
-    trend = "UP" if prediction > float(data.get("close")) else "DOWN"
+    trend = "UP" if prediction > close_price else "DOWN"
 
     return {
         "company": company,
-        "prediction": float(prediction),
+        "prediction": round(prediction, 2),
         "trend": trend
     }
