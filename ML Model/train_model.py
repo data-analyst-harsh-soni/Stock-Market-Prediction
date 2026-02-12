@@ -127,12 +127,12 @@ print("R2 Score:", round(r2, 4))
 
 joblib.dump(
     model,
-    r"ML Model\stock_model.pkl"
+    r"FULL_STACK_FROJECT\ML Model\stock_model.pkl"
 )
 
 joblib.dump(
     encoder,
-    r"ML Model\company_encoder.pkl"
+    r"FULL_STACK_FROJECT\ML Model\company_encoder.pkl"
 )
 
 
