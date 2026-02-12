@@ -1,19 +1,14 @@
 # ===============================
-# FASTAPI STOCK PREDICTION API + FRONTEND SERVING
+# FASTAPI STOCK PREDICTION API
 # ===============================
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 import pandas as pd
 import joblib
 import os
 
-# ===============================
 # PATH SETUP
-# ===============================
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MODEL_PATH = os.path.join(BASE_DIR, "stock_model.pkl")
@@ -26,18 +21,10 @@ DATA_PATH = os.path.join(
     "nse_prices.csv"
 )
 
-FRONTEND_PATH = os.path.join(BASE_DIR, "..", "frontend")
-
-# ===============================
 # CREATE APP
-# ===============================
-
 app = FastAPI()
 
-# ===============================
-# ENABLE CORS
-# ===============================
-
+# ENABLE CORS (important for Vercel frontend)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -46,85 +33,40 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ===============================
-# SERVE FRONTEND
-# ===============================
-
-# static files (css, js)
-app.mount("/static", StaticFiles(directory=FRONTEND_PATH), name="static")
-
-# homepage
-@app.get("/")
-def serve_home():
-    return FileResponse(os.path.join(FRONTEND_PATH, "index.html"))
-
-# ===============================
-# LOAD MODEL & ENCODER
-# ===============================
-
+# LOAD MODEL
 model = joblib.load(MODEL_PATH)
 encoder = joblib.load(ENCODER_PATH)
 
-print("Model & Encoder Loaded")
-
-# ===============================
-# LOAD DATASET
-# ===============================
-
+# LOAD DATA
 df = pd.read_csv(DATA_PATH)
 
 df["trade_date"] = pd.to_datetime(df["trade_date"])
 df = df.sort_values(["company", "trade_date"])
 
-# ===============================
 # FEATURE ENGINEERING
-# ===============================
-
 df["company_encoded"] = encoder.transform(df["company"])
 
 df["prev_close"] = df.groupby("company")["close"].shift(1)
 
-df["ma_5"] = (
-    df.groupby("company")["close"]
-    .rolling(5)
-    .mean()
-    .reset_index(0, drop=True)
-)
+df["ma_5"] = df.groupby("company")["close"].rolling(5).mean().reset_index(0, drop=True)
 
-df["ma_10"] = (
-    df.groupby("company")["close"]
-    .rolling(10)
-    .mean()
-    .reset_index(0, drop=True)
-)
+df["ma_10"] = df.groupby("company")["close"].rolling(10).mean().reset_index(0, drop=True)
 
 df["volatility"] = df["high"] - df["low"]
 
 df.dropna(inplace=True)
 
-print("Feature Engineering Done")
+# TEST
+@app.get("/")
+def home():
+    return {"message": "Stock API running"}
 
-# ===============================
-# TEST API
-# ===============================
-
-@app.get("/api/test")
-def test():
-    return {"status": "API working"}
-
-# ===============================
 # GET COMPANIES
-# ===============================
-
 @app.get("/companies")
 def get_companies():
-    companies = sorted(df["company"].unique().tolist())
-    return companies
+    return sorted(df["company"].unique().tolist())
 
-# ===============================
-# GET LATEST PRICE
-# ===============================
-
+# GET LATEST
 @app.get("/latest/{company}")
 def get_latest(company: str):
 
@@ -142,10 +84,7 @@ def get_latest(company: str):
         "close": float(latest["close"])
     }
 
-# ===============================
 # PREDICT
-# ===============================
-
 @app.post("/predict")
 def predict(data: dict):
 
@@ -159,25 +98,15 @@ def predict(data: dict):
     latest = company_data.iloc[-1]
 
     input_df = pd.DataFrame([{
-
         "company_encoded": latest["company_encoded"],
-
         "open": data["open"],
-
         "high": data["high"],
-
         "low": data["low"],
-
         "close": data["close"],
-
         "prev_close": latest["prev_close"],
-
         "ma_5": latest["ma_5"],
-
         "ma_10": latest["ma_10"],
-
         "volatility": data["high"] - data["low"]
-
     }])
 
     prediction = model.predict(input_df)[0]
