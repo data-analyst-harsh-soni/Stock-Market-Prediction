@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Prediction System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>📊 Stock Market Prediction System</h1>
+            <p class="subtitle">AI-Powered Stock Price Forecasting</p>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Enter Stock Details</h2>
+            </div>
+
+            <form id="predictionForm">
+                <div class="form-group">
+                    <label for="company">Select Company</label>
+                    <select id="company" name="company" required>
+                        <option value="">-- Choose a Company --</option>
+                        <option value="RELIANCE">Reliance Industries (RELIANCE)</option>
+                        <option value="TCS">Tata Consultancy Services (TCS)</option>
+                        <option value="INFY">Infosys (INFY)</option>
+                        <option value="WIPRO">Wipro (WIPRO)</option>
+                        <option value="HDFC">HDFC Bank (HDFC)</option>
+                        <option value="ICICI">ICICI Bank (ICICI)</option>
+                        <option value="BHARTIARTL">Bharti Airtel (BHARTIARTL)</option>
+                        <option value="ITC">ITC Limited (ITC)</option>
+                        <option value="SBIN">State Bank of India (SBIN)</option>
+                        <option value="HDFCBANK">HDFC Bank (HDFCBANK)</option>
+                    </select>
+                </div>
+
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label for="open">Open Price (₹)</label>
+                        <input type="number" id="open" name="open" step="0.01" placeholder="e.g., 780.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="high">High Price (₹)</label>
+                        <input type="number" id="high" name="high" step="0.01" placeholder="e.g., 800.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="low">Low Price (₹)</label>
+                        <input type="number" id="low" name="low" step="0.01" placeholder="e.g., 770.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="close">Close Price (₹)</label>
+                        <input type="number" id="close" name="close" step="0.01" placeholder="e.g., 790.00" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-predict" id="predictBtn">
+                    <span id="btnText">Predict Stock Price</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+            </form>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <span id="errorText"></span>
+            </div>
+
+            <!-- Result Section -->
+            <div id="resultSection" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h3>Prediction Results</h3>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-card">
+                        <div class="result-label">Current Close Price</div>
+                        <div class="result-value" id="currentPrice">₹0.00</div>
+                    </div>
+
+                    <div class="result-card highlight">
+                        <div class="result-label">Predicted Price</div>
+                        <div class="result-value predicted" id="predictedPrice">₹0.00</div>
+                    </div>
+                </div>
+
+                <div class="trend-section" id="trendSection">
+                    <div class="trend-card">
+                        <div class="trend-icon" id="trendIcon">📈</div>
+                        <div class="trend-details">
+                            <div class="trend-label">Market Trend</div>
+                            <div class="trend-value" id="trendValue">UPWARD</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by Machine Learning (RandomForestRegressor) & FastAPI</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

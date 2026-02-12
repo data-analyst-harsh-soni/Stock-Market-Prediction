@@ -1,0 +1,5 @@
+column,description
+open,Opening price of stock
+close,Closing price of stock
+sentiment_score,News sentiment score (-1 to 1)
+inflation,Inflation percentage
