@@ -1,25 +1,34 @@
 // ===============================
-// API Configuration
+// API Configuration (IMPORTANT)
 // ===============================
-const API_URL = "https://stock-backend.onrender.com/predict";
+const BASE_URL = "https://stock-backend.onrender.com";
+const API_URL = `${BASE_URL}/predict`;
 
 
 // ===============================
-// LOAD COMPANIES FROM DATASET
+// LOAD COMPANIES FROM BACKEND
 // ===============================
 async function loadCompanies() {
 
     try {
 
-        const response = await fetch("http://127.0.0.1:8000/companies");
+        const response = await fetch(`${BASE_URL}/companies`);
+
+        if (!response.ok)
+            throw new Error("Failed to load companies");
 
         const companies = await response.json();
 
         const select = document.getElementById("company");
 
+        // clear existing
+        select.innerHTML =
+            '<option value="">Select Company</option>';
+
         companies.forEach(company => {
 
-            const option = document.createElement("option");
+            const option =
+                document.createElement("option");
 
             option.value = company;
             option.textContent = company;
@@ -30,7 +39,8 @@ async function loadCompanies() {
 
     } catch (error) {
 
-        console.error("Error loading companies:", error);
+        console.error("Error:", error);
+        showError("Cannot load companies");
 
     }
 
@@ -38,7 +48,7 @@ async function loadCompanies() {
 
 
 // ===============================
-// LOAD LATEST PRICE WHEN COMPANY SELECTED
+// LOAD LATEST PRICE
 // ===============================
 async function loadLatestPrice(company) {
 
@@ -47,19 +57,30 @@ async function loadLatestPrice(company) {
     try {
 
         const response = await fetch(
-            `http://127.0.0.1:8000/latest/${company}`
+            `${BASE_URL}/latest/${company}`
         );
+
+        if (!response.ok)
+            throw new Error("Failed latest price");
 
         const data = await response.json();
 
-        document.getElementById("open").value = data.open;
-        document.getElementById("high").value = data.high;
-        document.getElementById("low").value = data.low;
-        document.getElementById("close").value = data.close;
+        document.getElementById("open").value =
+            data.open;
+
+        document.getElementById("high").value =
+            data.high;
+
+        document.getElementById("low").value =
+            data.low;
+
+        document.getElementById("close").value =
+            data.close;
 
     } catch (error) {
 
-        console.error("Error loading latest price:", error);
+        console.error(error);
+        showError("Cannot load latest price");
 
     }
 
@@ -67,166 +88,154 @@ async function loadLatestPrice(company) {
 
 
 // ===============================
-// DOM Elements
+// DOM ELEMENTS
 // ===============================
-const predictionForm = document.getElementById('predictionForm');
-const predictBtn = document.getElementById('predictBtn');
-const btnText = document.getElementById('btnText');
-const btnLoader = document.getElementById('btnLoader');
-const errorMessage = document.getElementById('errorMessage');
-const errorText = document.getElementById('errorText');
-const resultSection = document.getElementById('resultSection');
-const currentPrice = document.getElementById('currentPrice');
-const predictedPrice = document.getElementById('predictedPrice');
-const trendSection = document.getElementById('trendSection');
-const trendIcon = document.getElementById('trendIcon');
-const trendValue = document.getElementById('trendValue');
+const predictionForm =
+    document.getElementById("predictionForm");
 
-// Form Elements
-const companySelect = document.getElementById('company');
-const openInput = document.getElementById('open');
-const highInput = document.getElementById('high');
-const lowInput = document.getElementById('low');
-const closeInput = document.getElementById('close');
+const predictBtn =
+    document.getElementById("predictBtn");
+
+const btnText =
+    document.getElementById("btnText");
+
+const btnLoader =
+    document.getElementById("btnLoader");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const errorText =
+    document.getElementById("errorText");
+
+const resultSection =
+    document.getElementById("resultSection");
+
+const currentPrice =
+    document.getElementById("currentPrice");
+
+const predictedPrice =
+    document.getElementById("predictedPrice");
+
+const trendIcon =
+    document.getElementById("trendIcon");
+
+const trendValue =
+    document.getElementById("trendValue");
+
+
+// form inputs
+const companySelect =
+    document.getElementById("company");
+
+const openInput =
+    document.getElementById("open");
+
+const highInput =
+    document.getElementById("high");
+
+const lowInput =
+    document.getElementById("low");
+
+const closeInput =
+    document.getElementById("close");
 
 
 // ===============================
-// Hide error message
-// ===============================
-function hideError() {
-
-    if (errorMessage)
-        errorMessage.style.display = 'none';
-
-}
-
-
-// ===============================
-// Show error message
+// ERROR HANDLING
 // ===============================
 function showError(message) {
 
-    if (errorText)
-        errorText.textContent = message;
+    errorText.textContent = message;
+    errorMessage.style.display = "flex";
 
-    if (errorMessage)
-        errorMessage.style.display = 'flex';
+    resultSection.style.display = "none";
 
-    if (resultSection)
-        resultSection.style.display = 'none';
+}
+
+function hideError() {
+
+    errorMessage.style.display = "none";
 
 }
 
 
 // ===============================
-// Show loading state
+// LOADING STATE
 // ===============================
 function showLoading() {
 
-    if (predictBtn)
-        predictBtn.disabled = true;
-
-    if (btnText)
-        btnText.style.display = 'none';
-
-    if (btnLoader)
-        btnLoader.style.display = 'inline-block';
-
-    hideError();
+    predictBtn.disabled = true;
+    btnText.style.display = "none";
+    btnLoader.style.display = "inline-block";
 
 }
 
-
-// ===============================
-// Hide loading state
-// ===============================
 function hideLoading() {
 
-    if (predictBtn)
-        predictBtn.disabled = false;
-
-    if (btnText)
-        btnText.style.display = 'inline';
-
-    if (btnLoader)
-        btnLoader.style.display = 'none';
+    predictBtn.disabled = false;
+    btnText.style.display = "inline";
+    btnLoader.style.display = "none";
 
 }
 
 
 // ===============================
-// Validate form inputs
+// VALIDATION
 // ===============================
 function validateInputs(data) {
 
-    const { company, open, high, low, close } = data;
+    if (!data.company)
+        throw new Error("Select company");
 
-    if (!company)
-        throw new Error('Please select a company');
+    if (
+        data.open <= 0 ||
+        data.high <= 0 ||
+        data.low <= 0 ||
+        data.close <= 0
+    )
+        throw new Error("Invalid price");
 
-    if (open <= 0 || high <= 0 || low <= 0 || close <= 0)
-        throw new Error('All prices must be greater than 0');
-
-    if (high < low)
-        throw new Error('High price cannot be less than low price');
-
-    if (high < open || high < close)
-        throw new Error('High price must be the highest value');
-
-    if (low > open || low > close)
-        throw new Error('Low price must be the lowest value');
-
-    return true;
+    if (data.high < data.low)
+        throw new Error("High < Low");
 
 }
 
 
 // ===============================
-// Format currency
+// FORMAT CURRENCY
 // ===============================
 function formatCurrency(value) {
 
-    return `₹${parseFloat(value).toFixed(2)}`;
+    return "₹" + parseFloat(value).toFixed(2);
 
 }
 
 
 // ===============================
-// Display prediction results
+// DISPLAY RESULT
 // ===============================
-function displayResults(data, closePrice) {
+function displayResults(result, closePrice) {
 
-    const prediction = data.prediction;
-    const trend = data.trend;
+    resultSection.style.display = "block";
 
-    if (resultSection)
-        resultSection.style.display = 'block';
+    currentPrice.textContent =
+        formatCurrency(closePrice);
 
-    if (currentPrice)
-        currentPrice.textContent = formatCurrency(closePrice);
+    predictedPrice.textContent =
+        formatCurrency(result.prediction);
 
-    if (predictedPrice)
-        predictedPrice.textContent = formatCurrency(prediction);
+    if (result.trend === "UP") {
 
-    const trendCard = document.querySelector('.trend-card');
-
-    if (trend === 'UP') {
-
-        trendIcon.textContent = '📈';
-        trendValue.textContent = 'UPWARD';
-        trendValue.className = 'trend-value up';
-
-        if (trendCard)
-            trendCard.className = 'trend-card up';
+        trendIcon.textContent = "📈";
+        trendValue.textContent = "UPWARD";
+        trendValue.className = "trend-value up";
 
     } else {
 
-        trendIcon.textContent = '📉';
-        trendValue.textContent = 'DOWNWARD';
-        trendValue.className = 'trend-value down';
-
-        if (trendCard)
-            trendCard.className = 'trend-card down';
+        trendIcon.textContent = "📉";
+        trendValue.textContent = "DOWNWARD";
+        trendValue.className = "trend-value down";
 
     }
 
@@ -234,66 +243,70 @@ function displayResults(data, closePrice) {
 
 
 // ===============================
-// Make prediction API call
+// MAKE PREDICTION
 // ===============================
-async function makePrediction(requestData) {
+async function makePrediction(data) {
 
-    try {
+    const response =
+        await fetch(API_URL, {
 
-        const response = await fetch(API_URL, {
-
-            method: 'POST',
+            method: "POST",
 
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type":
+                    "application/json"
             },
 
-            body: JSON.stringify(requestData),
+            body: JSON.stringify(data)
 
         });
 
-        if (!response.ok)
-            throw new Error("Server error");
+    if (!response.ok)
+        throw new Error("Backend error");
 
-        return await response.json();
-
-    } catch (error) {
-
-        throw new Error(
-            'Cannot connect to backend server.'
-        );
-
-    }
+    return await response.json();
 
 }
 
 
 // ===============================
-// Handle form submission
+// FORM SUBMIT
 // ===============================
-async function handleSubmit(event) {
+async function handleSubmit(e) {
 
-    event.preventDefault();
+    e.preventDefault();
 
-    const formData = {
+    const data = {
 
-        company: companySelect.value.trim(),
-        open: parseFloat(openInput.value),
-        high: parseFloat(highInput.value),
-        low: parseFloat(lowInput.value),
-        close: parseFloat(closeInput.value),
+        company: companySelect.value,
+
+        open:
+            parseFloat(openInput.value),
+
+        high:
+            parseFloat(highInput.value),
+
+        low:
+            parseFloat(lowInput.value),
+
+        close:
+            parseFloat(closeInput.value)
 
     };
 
     try {
 
-        validateInputs(formData);
+        validateInputs(data);
 
         showLoading();
 
-        const result = await makePrediction(formData);
+        const result =
+            await makePrediction(data);
 
-        displayResults(result, formData.close);
+        displayResults(
+            result,
+            data.close
+        );
 
     } catch (error) {
 
@@ -309,90 +322,35 @@ async function handleSubmit(event) {
 
 
 // ===============================
-// Add input validation listeners
-// ===============================
-function addInputValidation() {
-
-    const numberInputs = [
-        openInput,
-        highInput,
-        lowInput,
-        closeInput
-    ];
-
-    numberInputs.forEach(input => {
-
-        if (input)
-            input.addEventListener('input', hideError);
-
-    });
-
-    if (companySelect)
-        companySelect.addEventListener('change', hideError);
-
-}
-
-
-// ===============================
-// Initialize the application
+// INIT
 // ===============================
 function init() {
 
     loadCompanies();
 
-    if (predictionForm)
-        predictionForm.addEventListener(
-            'submit',
-            handleSubmit
-        );
+    predictionForm.addEventListener(
+        "submit",
+        handleSubmit
+    );
 
-    addInputValidation();
+    companySelect.addEventListener(
+        "change",
+        function () {
 
-    console.log(
-        'Stock Market Prediction App initialized'
+            loadLatestPrice(
+                this.value
+            );
+
+        }
     );
 
 }
 
 
 // ===============================
-// Company change listener
+// START APP
 // ===============================
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
-
-        const companySelect =
-            document.getElementById("company");
-
-        if (companySelect) {
-
-            companySelect.addEventListener(
-                "change",
-                function () {
-
-                    loadLatestPrice(this.value);
-
-                });
-
-        }
-
-    }
+    init
 );
-
-
-// ===============================
-// Run initialization
-// ===============================
-if (document.readyState === 'loading') {
-
-    document.addEventListener(
-        'DOMContentLoaded',
-        init
-    );
-
-} else {
-
-    init();
-
-}
