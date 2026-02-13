@@ -1,27 +1,29 @@
 // ===============================
-// API Configuration (IMPORTANT)
+// API Configuration (YOUR REAL BACKEND)
 // ===============================
-const BASE_URL = "https://stock-backend.onrender.com";
+const BASE_URL = "https://stock-market-api-1vsa.onrender.com";
 const API_URL = `${BASE_URL}/predict`;
 
 
 // ===============================
-// LOAD COMPANIES FROM BACKEND
+// LOAD COMPANIES
 // ===============================
 async function loadCompanies() {
 
     try {
 
-        const response = await fetch(`${BASE_URL}/companies`);
+        const response =
+            await fetch(`${BASE_URL}/companies`);
 
         if (!response.ok)
-            throw new Error("Failed to load companies");
+            throw new Error("Cannot load companies");
 
-        const companies = await response.json();
+        const companies =
+            await response.json();
 
-        const select = document.getElementById("company");
+        const select =
+            document.getElementById("company");
 
-        // clear existing
         select.innerHTML =
             '<option value="">Select Company</option>';
 
@@ -39,8 +41,11 @@ async function loadCompanies() {
 
     } catch (error) {
 
-        console.error("Error:", error);
-        showError("Cannot load companies");
+        showError(
+            "Backend connection failed"
+        );
+
+        console.error(error);
 
     }
 
@@ -56,14 +61,16 @@ async function loadLatestPrice(company) {
 
     try {
 
-        const response = await fetch(
-            `${BASE_URL}/latest/${company}`
-        );
+        const response =
+            await fetch(
+                `${BASE_URL}/latest/${company}`
+            );
 
         if (!response.ok)
-            throw new Error("Failed latest price");
+            throw new Error("Latest failed");
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
         document.getElementById("open").value =
             data.open;
@@ -79,8 +86,11 @@ async function loadLatestPrice(company) {
 
     } catch (error) {
 
+        showError(
+            "Cannot load price data"
+        );
+
         console.error(error);
-        showError("Cannot load latest price");
 
     }
 
@@ -88,7 +98,7 @@ async function loadLatestPrice(company) {
 
 
 // ===============================
-// DOM ELEMENTS
+// DOM Elements
 // ===============================
 const predictionForm =
     document.getElementById("predictionForm");
@@ -123,8 +133,6 @@ const trendIcon =
 const trendValue =
     document.getElementById("trendValue");
 
-
-// form inputs
 const companySelect =
     document.getElementById("company");
 
@@ -142,32 +150,38 @@ const closeInput =
 
 
 // ===============================
-// ERROR HANDLING
+// ERROR FUNCTIONS
 // ===============================
 function showError(message) {
 
-    errorText.textContent = message;
-    errorMessage.style.display = "flex";
+    errorText.textContent =
+        message;
 
-    resultSection.style.display = "none";
+    errorMessage.style.display =
+        "flex";
+
+    resultSection.style.display =
+        "none";
 
 }
 
 function hideError() {
 
-    errorMessage.style.display = "none";
+    errorMessage.style.display =
+        "none";
 
 }
 
 
 // ===============================
-// LOADING STATE
+// LOADING FUNCTIONS
 // ===============================
 function showLoading() {
 
     predictBtn.disabled = true;
     btnText.style.display = "none";
-    btnLoader.style.display = "inline-block";
+    btnLoader.style.display =
+        "inline-block";
 
 }
 
@@ -175,39 +189,20 @@ function hideLoading() {
 
     predictBtn.disabled = false;
     btnText.style.display = "inline";
-    btnLoader.style.display = "none";
+    btnLoader.style.display =
+        "none";
 
 }
 
 
 // ===============================
-// VALIDATION
-// ===============================
-function validateInputs(data) {
-
-    if (!data.company)
-        throw new Error("Select company");
-
-    if (
-        data.open <= 0 ||
-        data.high <= 0 ||
-        data.low <= 0 ||
-        data.close <= 0
-    )
-        throw new Error("Invalid price");
-
-    if (data.high < data.low)
-        throw new Error("High < Low");
-
-}
-
-
-// ===============================
-// FORMAT CURRENCY
+// FORMAT
 // ===============================
 function formatCurrency(value) {
 
-    return "₹" + parseFloat(value).toFixed(2);
+    return "₹" +
+        parseFloat(value)
+            .toFixed(2);
 
 }
 
@@ -217,7 +212,8 @@ function formatCurrency(value) {
 // ===============================
 function displayResults(result, closePrice) {
 
-    resultSection.style.display = "block";
+    resultSection.style.display =
+        "block";
 
     currentPrice.textContent =
         formatCurrency(closePrice);
@@ -227,15 +223,25 @@ function displayResults(result, closePrice) {
 
     if (result.trend === "UP") {
 
-        trendIcon.textContent = "📈";
-        trendValue.textContent = "UPWARD";
-        trendValue.className = "trend-value up";
+        trendIcon.textContent =
+            "📈";
+
+        trendValue.textContent =
+            "UPWARD";
+
+        trendValue.className =
+            "trend-value up";
 
     } else {
 
-        trendIcon.textContent = "📉";
-        trendValue.textContent = "DOWNWARD";
-        trendValue.className = "trend-value down";
+        trendIcon.textContent =
+            "📉";
+
+        trendValue.textContent =
+            "DOWNWARD";
+
+        trendValue.className =
+            "trend-value down";
 
     }
 
@@ -257,12 +263,15 @@ async function makePrediction(data) {
                     "application/json"
             },
 
-            body: JSON.stringify(data)
+            body:
+                JSON.stringify(data)
 
         });
 
     if (!response.ok)
-        throw new Error("Backend error");
+        throw new Error(
+            "Prediction failed"
+        );
 
     return await response.json();
 
@@ -270,35 +279,44 @@ async function makePrediction(data) {
 
 
 // ===============================
-// FORM SUBMIT
+// SUBMIT HANDLER
 // ===============================
 async function handleSubmit(e) {
 
     e.preventDefault();
 
-    const data = {
-
-        company: companySelect.value,
-
-        open:
-            parseFloat(openInput.value),
-
-        high:
-            parseFloat(highInput.value),
-
-        low:
-            parseFloat(lowInput.value),
-
-        close:
-            parseFloat(closeInput.value)
-
-    };
-
     try {
 
-        validateInputs(data);
+        hideError();
 
         showLoading();
+
+        const data = {
+
+            company:
+                companySelect.value,
+
+            open:
+                parseFloat(
+                    openInput.value
+                ),
+
+            high:
+                parseFloat(
+                    highInput.value
+                ),
+
+            low:
+                parseFloat(
+                    lowInput.value
+                ),
+
+            close:
+                parseFloat(
+                    closeInput.value
+                )
+
+        };
 
         const result =
             await makePrediction(data);
@@ -310,7 +328,9 @@ async function handleSubmit(e) {
 
     } catch (error) {
 
-        showError(error.message);
+        showError(
+            "Cannot connect to backend"
+        );
 
     } finally {
 
@@ -347,8 +367,6 @@ function init() {
 }
 
 
-// ===============================
-// START APP
 // ===============================
 document.addEventListener(
     "DOMContentLoaded",
