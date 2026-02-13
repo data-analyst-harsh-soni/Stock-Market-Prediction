@@ -1,7 +1,7 @@
 // ===============================
 // API Configuration
 // ===============================
-const API_URL = 'https://stock-market-api.onrender.com/predict';
+const API_URL = "https://stock-backend.onrender.com/predict";
 
 
 // ===============================
