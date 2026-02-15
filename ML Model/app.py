@@ -1,6 +1,4 @@
-# ===============================
-# FASTAPI STOCK PREDICTION API
-# ===============================
+
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,9 +6,6 @@ import pandas as pd
 import joblib
 import os
 
-# ===============================
-# PATH SETUP (IMPORTANT FIX)
-# ===============================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,15 +19,9 @@ DATA_PATH = os.path.join(
     "nse_prices.csv"
 )
 
-# ===============================
-# CREATE FASTAPI APP
-# ===============================
 
 app = FastAPI(title="Stock Market Prediction API")
 
-# ===============================
-# ENABLE CORS
-# ===============================
 
 app.add_middleware(
     CORSMiddleware,
@@ -42,9 +31,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ===============================
-# LOAD MODEL & ENCODER
-# ===============================
 
 model = None
 encoder = None
@@ -59,17 +45,12 @@ except Exception as e:
     print("❌ Model load error:", str(e))
 
 
-# ===============================
-# LOAD DATASET
-# ===============================
-
 df = None
 
 try:
 
     df = pd.read_csv(DATA_PATH)
 
-    # Clean company column
     df["company"] = (
         df["company"]
         .astype(str)
@@ -77,11 +58,9 @@ try:
         .str.upper()
     )
 
-    # Convert numeric safely
     for col in ["open", "high", "low", "close"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    # Fix date
     df["trade_date"] = pd.to_datetime(
         df["trade_date"],
         errors="coerce"
@@ -93,9 +72,6 @@ try:
         ["company", "trade_date"]
     )
 
-    # ===============================
-    # FEATURE ENGINEERING
-    # ===============================
 
     df["company_encoded"] = df["company"].apply(
         lambda x:
@@ -136,9 +112,6 @@ except Exception as e:
     print("❌ Dataset load error:", str(e))
 
 
-# ===============================
-# HOME ROUTE
-# ===============================
 
 @app.get("/")
 def home():
@@ -150,9 +123,6 @@ def home():
     }
 
 
-# ===============================
-# GET COMPANIES
-# ===============================
 
 @app.get("/companies")
 def get_companies():
@@ -164,10 +134,6 @@ def get_companies():
         df["company"].unique().tolist()
     )
 
-
-# ===============================
-# GET LATEST PRICE
-# ===============================
 
 @app.get("/latest/{company}")
 def latest_price(company: str):
@@ -199,10 +165,6 @@ def latest_price(company: str):
         "close": float(latest["close"])
     }
 
-
-# ===============================
-# PREDICT
-# ===============================
 
 @app.post("/predict")
 def predict(data: dict):
