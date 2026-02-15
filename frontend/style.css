@@ -1,7 +1,6 @@
-/* Import Modern Font */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +15,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Animated Background */
 .background {
     position: fixed;
     width: 100vw;
@@ -75,7 +73,6 @@ body {
     }
 }
 
-/* Container */
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -84,7 +81,6 @@ body {
     z-index: 1;
 }
 
-/* Header */
 header {
     text-align: center;
     margin-bottom: 40px;
@@ -107,7 +103,6 @@ header h1 {
     font-weight: 400;
 }
 
-/* Card */
 .card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -129,8 +124,6 @@ header h1 {
     margin-bottom: 30px;
     color: #ffffff;
 }
-
-/* Form Styles */
 .form-group {
     margin-bottom: 24px;
 }
@@ -173,7 +166,6 @@ input[type="number"]::placeholder {
     color: #6b6b80;
 }
 
-/* Input Grid */
 .input-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -181,7 +173,6 @@ input[type="number"]::placeholder {
     margin-bottom: 24px;
 }
 
-/* Predict Button */
 .btn-predict {
     width: 100%;
     padding: 16px 32px;
@@ -213,7 +204,6 @@ input[type="number"]::placeholder {
     transform: none;
 }
 
-/* Loader */
 .loader {
     display: inline-block;
     width: 20px;
@@ -231,7 +221,6 @@ input[type="number"]::placeholder {
     }
 }
 
-/* Error Message */
 .error-message {
     background: rgba(245, 87, 108, 0.1);
     border: 1px solid rgba(245, 87, 108, 0.3);
@@ -247,8 +236,6 @@ input[type="number"]::placeholder {
 .error-icon {
     font-size: 1.5rem;
 }
-
-/* Result Section */
 .result-section {
     margin-top: 40px;
     padding-top: 40px;
@@ -319,8 +306,6 @@ input[type="number"]::placeholder {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-/* Trend Section */
 .trend-section {
     margin-top: 24px;
 }
@@ -385,7 +370,6 @@ input[type="number"]::placeholder {
     color: #f87171;
 }
 
-/* Footer */
 footer {
     text-align: center;
     margin-top: 40px;
@@ -397,8 +381,6 @@ footer p {
     color: #6b6b80;
     font-size: 0.9rem;
 }
-
-/* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
