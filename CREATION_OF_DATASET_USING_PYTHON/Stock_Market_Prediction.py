@@ -22,11 +22,9 @@ folders = [
     "logs"
 ]
 
-# create folders
 for folder in folders:
     os.makedirs(os.path.join(base_dir, folder), exist_ok=True)
 
-# date range (business days only)
 start_date = datetime(2015, 1, 1)
 end_date = datetime(2026, 2, 1)
 
@@ -36,7 +34,6 @@ dates = pd.date_range(
     freq="B"
 )
 
-# companies list
 companies = [
     "HDFC", "HDFCBANK", "ICICIBANK", "SBIN", "AXISBANK",
     "KOTAKBANK", "INDUSINDBK", "BANKBARODA", "PNB", "CANBK",
@@ -55,7 +52,6 @@ companies = [
     "MARUTI", "TATAMOTORS", "M&M", "BAJAJ-AUTO", "HEROMOTOCO"
 ]
 
-# sector mapping
 company_sector_map = {
 
     "HDFC": "Finance",
@@ -115,7 +111,6 @@ company_sector_map = {
     "HEROMOTOCO": "Auto"
 }
 
-# sector volatility
 sector_volatility = {
 
     "Finance": 0.012,
@@ -126,7 +121,6 @@ sector_volatility = {
     "Auto": 0.016
 }
 
-# sector annual growth
 sector_growth = {
 
     "Finance": 0.10,
@@ -140,7 +134,6 @@ sector_growth = {
 trading_days = 252
 
 
-# stock price generator
 def generate_stock_prices(market):
 
     data = []
@@ -171,7 +164,6 @@ def generate_stock_prices(market):
 
             low_price = min(open_price, close_price) * random.uniform(0.98, 0.999)
 
-            # avoid negative price
             open_price = max(open_price, 5)
             close_price = max(close_price, 5)
             high_price = max(high_price, open_price, close_price)
@@ -205,14 +197,11 @@ def generate_stock_prices(market):
     return df
 
 
-# generate NSE data
 nse = generate_stock_prices("NSE")
 
-# generate BSE data
 bse = generate_stock_prices("BSE")
 
 
-# save datasets
 nse.to_csv(
     f"{base_dir}/raw_data/nse_prices.csv",
     index=False
@@ -226,7 +215,6 @@ bse.to_csv(
 print("✅ NSE and BSE datasets generated successfully")
 
 
-# ----------- REALISTIC GLOBAL INDICES GENERATION -----------
 
 index_config = {
     "SENSEX": {
@@ -263,10 +251,8 @@ for idx, cfg in index_config.items():
 
     for i, date in enumerate(dates):
 
-        # market movement
         noise = np.random.normal(0, cfg["daily_volatility"])
 
-        # long-term growth
         growth = value * daily_growth
 
         value = value + noise + growth
@@ -287,8 +273,6 @@ pd.DataFrame(
 
 print("✅ Realistic Global Indices Generated Successfully")
 
-
-# ----------- REALISTIC FUNDAMENTALS GENERATION -----------
 
 sector_pe_range = {
     "Finance": (10, 25),
@@ -358,9 +342,6 @@ fundamentals_df.to_csv(
 print("✅ Realistic Fundamentals Generated Successfully")
 
 
-# ----------- FIXED REALISTIC SENTIMENT GENERATION -----------
-
-# sector sentiment bias (stronger realistic bias)
 sector_sentiment_bias = {
     "Finance": 0.15,
     "IT": 0.20,
@@ -370,7 +351,6 @@ sector_sentiment_bias = {
     "Auto": 0.08
 }
 
-# company-specific bias (large companies more positive)
 company_sentiment_bias = {
     "RELIANCE": 0.25,
     "TCS": 0.22,
@@ -386,24 +366,16 @@ for company in companies:
 
     sector = company_sector_map[company]
 
-    # base bias
     sector_bias = sector_sentiment_bias[sector]
 
-    # company bias (if exists)
     company_bias = company_sentiment_bias.get(company, random.uniform(0.02, 0.10))
 
-    # overall bias
     base_bias = sector_bias + company_bias
 
     for i, date in enumerate(dates):
 
-        # market cycle (bull/bear cycle)
         cycle = 0.15 * np.sin(i / 250)
-
-        # small random noise
         noise = random.uniform(-0.15, 0.15)
-
-        # occasional big news spike
         spike = 0
         if random.random() < 0.04:
             spike = random.uniform(-0.4, 0.6)
@@ -415,7 +387,6 @@ for company in companies:
             spike
         )
 
-        # clamp between -1 and +1
         sentiment_score = max(-1, min(1, sentiment_score))
 
         sentiment.append([
@@ -437,14 +408,10 @@ sentiment_df.to_csv(
 
 print("✅ Fixed Realistic Sentiment Generated Successfully")
 
-# ----------- FIXED REALISTIC VOLUME GENERATION -----------
-
-# define company size categories
 large_caps = ["RELIANCE", "HDFCBANK", "ICICIBANK", "TCS", "INFY", "SBIN"]
 mid_caps = ["AXISBANK", "KOTAKBANK", "NTPC", "POWERGRID", "HCLTECH", "WIPRO"]
 small_caps = list(set(companies) - set(large_caps) - set(mid_caps))
 
-# assign base volume based on company size
 company_base_volume = {}
 
 for company in companies:
@@ -459,7 +426,6 @@ for company in companies:
         company_base_volume[company] = random.randint(500000, 2500000)
 
 
-# sector multipliers
 sector_multiplier = {
     "Finance": 1.5,
     "Energy": 1.4,
@@ -469,8 +435,6 @@ sector_multiplier = {
     "Auto": 1.0
 }
 
-
-# generate volume
 volume = []
 
 for company in companies:
@@ -506,7 +470,6 @@ for company in companies:
         ])
 
 
-# save file
 volume_df = pd.DataFrame(
     volume,
     columns=["date", "company", "volume"]
@@ -535,7 +498,6 @@ with open(f"{base_dir}/logs/generation_log.txt", "w") as f:
 
 print("✅ Dataset Generated Successfully")
 
-# ----------- REALISTIC MACRO ECONOMIC DATA GENERATION -----------
 
 macro_data = []
 
@@ -544,13 +506,10 @@ interest_rate = 6.5
 
 for i, date in enumerate(dates):
 
-    # inflation slow movement
     inflation += np.random.normal(0, 0.02)
 
-    # interest rate slower movement
     interest_rate += np.random.normal(0, 0.015)
 
-    # keep within realistic bounds
     inflation = max(2.5, min(inflation, 9))
     interest_rate = max(3.5, min(interest_rate, 10))
 
