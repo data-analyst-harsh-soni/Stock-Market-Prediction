@@ -116,46 +116,34 @@ The data model is built on **5 core entity tables** connected through a clean re
 <div align="center">
 
 <h2>🏠 Market Overview Dashboard</h2>
-
-<img src="Dashboard/Market Overview.png" width="900">
-
+<img src="Dashboard/Market%20Overview.png" width="900">
 <br><br>
 
 <h2>🏢 Company Fundamentals Dashboard</h2>
-
-<img src="Dashboard/Company Fundamentals.png" width="900">
-
+<img src="Dashboard/Company%20Fundamentals.png" width="900">
 <br><br>
 
 <h2>📈 Stock Price Trend Dashboard</h2>
-
-<img src="Dashboard/Stock Price Trend.png" width="900">
-
+<img src="Dashboard/Stock%20Price%20Trend.png" width="900">
 <br><br>
 
 <h2>📦 Volume Analysis Dashboard</h2>
-
-<img src="Dashboard/Volume Analysis Dashboard.png" width="900">
-
+<img src="Dashboard/Volume%20Analysis%20Dashboard.png" width="900">
 <br><br>
 
 <h2>🧠 Market Sentiment Intelligence Dashboard</h2>
-
-<img src="Dashboard/Market Sentiment Intelligence Dashboard.png" width="900">
-
+<img src="Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png" width="900">
 <br><br>
 
 <h2>🌍 Global Market Intelligence Dashboard</h2>
-
-<img src="Dashboard/Global Market Intelligence Dashboard.png" width="900">
-
+<img src="Dashboard/Global%20Market%20Intelligence%20Dashboard.png" width="900">
 <br><br>
 
 <h2>🇮🇳 Indian Stock Market Intelligence & Analytics</h2>
-
-<img src="Dashboard/Indian Stock Market Intelligence & Analytics.png" width="900">
+<img src="Dashboard/Indian%20Stock%20Market%20Intelligence%20%26%20Analytics.png" width="900">
 
 </div>
+
 
 
 ## 🚀 Step-by-Step Project Workflow
