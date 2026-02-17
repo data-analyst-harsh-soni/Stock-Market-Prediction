@@ -113,45 +113,41 @@ The data model is built on **5 core entity tables** connected through a clean re
 
 > **8 Power BI dashboards** built from SQL-connected live data, enabling cross-filtered intelligence across market segments.
 
+---
+
 ### 1️⃣ 🏠 Market Overview Dashboard
-<div align="center">
-<img src="Dashboard/Market Overview.png" width="900">
-</div>
+
+![Market Overview](Dashboard/Market%20Overview.png)
 
 ---
 
 ### 2️⃣ 🌍 Global Market Intelligence Dashboard
-<div align="center">
-<img src="Dashboard/Global Market Intelligence Dashboard.png" width="900">
-</div>
+
+![Global Market Intelligence](Dashboard/Global%20Market%20Intelligence%20Dashboard.png)
 
 ---
 
 ### 3️⃣ 📈 Stock Price Trend Dashboard
-<div align="center">
-<img src="Dashboard/Stock Price Trend.png" width="900">
-</div>
+
+![Stock Price Trend](Dashboard/Stock%20Price%20Trend.png)
 
 ---
 
 ### 4️⃣ 📦 Volume Analysis Dashboard
-<div align="center">
-<img src="Dashboard/Volume Analysis Dashboard.png" width="900">
-</div>
+
+![Volume Analysis](Dashboard/Volume%20Analysis%20Dashboard.png)
 
 ---
 
 ### 5️⃣ 🧠 Market Sentiment Intelligence Dashboard
-<div align="center">
-<img src="Dashboard/Market Sentiment Intelligence Dashboard.png" width="900">
-</div>
+
+![Market Sentiment](Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png)
 
 ---
 
 ### 6️⃣ 🏢 Company Fundamentals Dashboard
-<div align="center">
-<img src="Dashboard/Company Fundamentals.png" width="900">
-</div>
+
+![Company Fundamentals](Dashboard/Company%20Fundamentals.png)
 
 ---
 
