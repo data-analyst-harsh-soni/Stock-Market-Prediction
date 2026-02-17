@@ -116,67 +116,75 @@ The data model is built on **5 core entity tables** connected through a clean re
 ---
 
 ### 🏠 Market Overview Dashboard
+
 <div align="center">
 
-![Market Overview](Dashboard/Market%20Overview.png)
+<img src="./Dashboard/Market Overview.png" alt="Market Overview Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 🏢 Company Fundamentals Dashboard
+
 <div align="center">
 
-![Company Fundamentals](Dashboard/Company%20Fundamentals.png)
+<img src="./Dashboard/Company Fundamentals.png" alt="Company Fundamentals Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 📈 Stock Price Trend Dashboard
+
 <div align="center">
 
-![Stock Price Trend](Dashboard/Stock%20Price%20Trend.png)
+<img src="./Dashboard/Stock Price Trend.png" alt="Stock Price Trend Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 📦 Volume Analysis Dashboard
+
 <div align="center">
 
-![Volume Analysis](Dashboard/Volume%20Analysis%20Dashboard.png)
+<img src="./Dashboard/Volume Analysis Dashboard.png" alt="Volume Analysis Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 🧠 Market Sentiment Intelligence Dashboard
+
 <div align="center">
 
-![Market Sentiment](Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png)
+<img src="./Dashboard/Market Sentiment Intelligence Dashboard.png" alt="Market Sentiment Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 🌍 Global Market Intelligence Dashboard
+
 <div align="center">
 
-![Global Market](Dashboard/Global%20Market%20Intelligence%20Dashboard.png)
+<img src="./Dashboard/Global Market Intelligence Dashboard.png" alt="Global Market Dashboard" width="900"/>
 
 </div>
 
 ---
 
 ### 🇮🇳 Indian Stock Market Intelligence & Analytics
+
 <div align="center">
 
-![Indian Market Intelligence](Dashboard/Indian%20Stock%20Market%20Intelligence%20%26%20Analytics.png)
+<img src="./Dashboard/Indian Stock Market Intelligence & Analytics.png" alt="Indian Market Dashboard" width="900"/>
 
 </div>
 
 ---
+
 
 
 ## 🚀 Step-by-Step Project Workflow
