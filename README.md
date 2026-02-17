@@ -117,39 +117,40 @@ The data model is built on **5 core entity tables** connected through a clean re
 
 ### 1️⃣ 🏠 Market Overview Dashboard
 
-![Market Overview](Dashboard/Market%20Overview.png)
+<img src="Dashboard/Market Overview.png" alt="Market Overview" width="900"/>
 
 ---
 
 ### 2️⃣ 🌍 Global Market Intelligence Dashboard
 
-![Global Market Intelligence](Dashboard/Global%20Market%20Intelligence%20Dashboard.png)
+<img src="Dashboard/Global Market Intelligence Dashboard.png" alt="Global Market Intelligence" width="900"/>
 
 ---
 
 ### 3️⃣ 📈 Stock Price Trend Dashboard
 
-![Stock Price Trend](Dashboard/Stock%20Price%20Trend.png)
+<img src="Dashboard/Stock Price Trend.png" alt="Stock Price Trend" width="900"/>
 
 ---
 
 ### 4️⃣ 📦 Volume Analysis Dashboard
 
-![Volume Analysis](Dashboard/Volume%20Analysis%20Dashboard.png)
+<img src="Dashboard/Volume Analysis Dashboard.png" alt="Volume Analysis" width="900"/>
 
 ---
 
 ### 5️⃣ 🧠 Market Sentiment Intelligence Dashboard
 
-![Market Sentiment](Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png)
+<img src="Dashboard/Market Sentiment Intelligence Dashboard.png" alt="Market Sentiment" width="900"/>
 
 ---
 
 ### 6️⃣ 🏢 Company Fundamentals Dashboard
 
-![Company Fundamentals](Dashboard/Company%20Fundamentals.png)
+<img src="Dashboard/Company Fundamentals.png" alt="Company Fundamentals" width="900"/>
 
 ---
+
 
 
 ## 🚀 Step-by-Step Project Workflow
