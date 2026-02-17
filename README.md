@@ -1,462 +1,525 @@
 <div align="center">
 
-# 📈 Stock Market Intelligence and Prediction System
+# 📈 Stock Market Intelligence & Prediction System
 
-### *End-to-End Data Analyst Project with SQL, Machine Learning, FastAPI, and Power BI Dashboards*
+### *End-to-End Data Analyst Project using Python, SQL, Power BI, Machine Learning, and FastAPI*
 
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Machine Learning](https://img.shields.io/badge/Machine_Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://scikit-learn.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
-[![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
-[![Scikit Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+<br>
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine_Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+
+<br>
+
+![Project Banner](https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:16213e,100:0f3460&height=120&section=header&text=Stock%20Market%20Intelligence&fontSize=32&fontColor=e94560&animation=fadeIn&fontAlignY=65)
 
 </div>
 
 ---
 
-## 🎯 Project Overview
+## 🌟 Project Overview
 
-This project demonstrates a comprehensive **end-to-end data analytics pipeline** for stock market intelligence and prediction. The system integrates multiple data sources, performs advanced analytics, and delivers actionable insights through interactive dashboards and real-time predictions.
+This is a **fully end-to-end, production-grade Data Analytics & Machine Learning project** built on the Indian Stock Market (NSE). Unlike typical projects that rely on pre-collected external datasets, this project **generates its own realistic stock market dataset using Python**, then takes it through a complete analytical pipeline — from raw data creation to interactive web-based predictions.
 
-**Key Capabilities:**
-- 📊 **Data Creation & Processing** : Custom stock market datasets created and processed using Python
-- 🧹 **Data Cleaning**: Robust data preprocessing using Python and Pandas to handle missing values, outliers, and inconsistencies
-- 🔧 **Feature Engineering**: Creation of technical indicators, rolling statistics, and predictive features
-- 💾 **SQL Database Storage**: Structured relational database design for efficient data management and querying
-- 🔍 **SQL Analysis**: Complex queries for trend analysis, correlation studies, and business intelligence
-- 🤖 **Machine Learning Prediction**: Advanced ML models for stock price forecasting and trend prediction
-- ⚡ **FastAPI Integration**: RESTful API for real-time predictions and system integration
-- 📈 **Power BI Dashboards**: 8 comprehensive dashboards for multi-dimensional market analysis
-- 💡 **Business Insights**: Data-driven recommendations for investment decisions
-
----
-
+| Stage | Technology | Description |
+|-------|-----------|-------------|
+| 🏗️ Dataset Creation | Python | Synthetically generated realistic NSE stock market data |
+| 🧹 Data Cleaning | Python / Jupyter | 8 specialized cleaning notebooks for each data domain |
+| ⚙️ Feature Engineering | Python | Derived financial metrics and predictive features |
+| 🗄️ SQL Analysis | SQL Server | Data import, Data Mart creation, 20+ analytical queries |
+| 📊 Visualization | Power BI | 8 interactive dashboards with cross-filter intelligence |
+| 🤖 ML Model | Scikit-Learn | Trained prediction model serialized as `.pkl` |
+| ⚡ API | FastAPI | RESTful prediction endpoint for real-time inference |
+| 🌐 Frontend | HTML/CSS/JS | Interactive web interface to display stock predictions |
 
 ---
 
-## ⚙️ Architecture Components
+## 🔄 Complete Project Workflow
 
-### 1. Data Layer
-- Collects stock market data
-- Stores structured datasets
-- Source: APIs, CSV files
+```mermaid
+flowchart TD
+    A([🐍 Python Dataset Creation\nCREATION_OF_DATASET_USING_PYTHON/]) --> B
 
-### 2. Processing Layer
-- Data cleaning
-- Feature engineering
-- Transformation
+    B([🗂️ Raw Dataset Storage\nstock_market_unclean_dataset/\n6 data domains: raw, company,\nmacro, trading, news, metadata])
 
-### 3. Machine Learning Layer
-- Model training
-- Prediction generation
-- Model saved as `.pkl`
+    B --> C([🧹 Data Cleaning — Python\nCleaning_Code/\n8 Jupyter Notebooks\none per data domain])
 
-### 4. Backend Layer
-- FastAPI server
-- Handles prediction requests
-- Connects frontend and model
+    C --> D([⚙️ Feature Engineering\nDerived Metrics & Financial Ratios\nSignal-ready columns added])
 
-### 5. Frontend Layer
-- User interface
-- Displays prediction results
-- Calls backend API
+    D --> E([📁 Clean Dataset Storage\nstock_market_clean_dataset_with_Feature_Eng/\n7 structured CSV files])
 
-### 6. Visualization Layer
-- Power BI dashboard
-- Shows insights and trends
+    E --> F([🗄️ SQL Database Import\nSQL/DATA_IMPORTING_CODE.sql\nData loaded into relational tables])
 
----
+    F --> G([🧱 Data Mart Creation\nSQL/SQL Data Mart.sql\nStar schema architecture])
 
-## 🔄 Data Flow
+    G --> H([🔍 SQL Analysis — 20+ Queries\nSQL/QUESTION_WITH_SOLUTION.sql\nReal-world business queries])
 
+    H --> I([🗺️ ER Diagram Creation\nEntity-Relationship mapping\nacross 5 core tables])
 
-**Pipeline Flow:**
-1. **Data Collection** → Multi-source data extraction (APIs, web scraping, market feeds)
-2. **Data Cleaning** → Python/Pandas preprocessing and quality assurance
-3. **Feature Engineering** → Technical indicators and predictive features
-4. **SQL Storage** → Normalized relational database design
-5. **SQL Analysis** → Complex analytical queries and aggregations
-6. **ML Training** → Model development and validation
-7. **FastAPI** → Production-ready prediction endpoints
-8. **Power BI** → Interactive visualization and reporting
-9. **Insights** → Actionable business intelligence
+    E --> J([🤖 ML Model Training\nML Model/train_model.py\nScikit-Learn pipeline])
+
+    J --> K([💾 Model Serialization\nstock_model.pkl\ncompany_encoder.pkl])
+
+    K --> L([⚡ FastAPI Prediction API\nML Model/app.py\nREST endpoint for predictions])
+
+    L --> M([🌐 Frontend Application\nfrontend/index.html + script.js + style.css\nUser-facing prediction interface])
+
+    G --> N([📊 Power BI Integration\nSQL → Power BI connection\n8 interactive dashboards])
+
+    N --> O([💡 Business Insights\nDashboard/\nMarket intelligence & analytics])
+
+    style A fill:#1e3a5f,stroke:#4fc3f7,color:#fff
+    style E fill:#1b4332,stroke:#52b788,color:#fff
+    style J fill:#4a1942,stroke:#da77f2,color:#fff
+    style N fill:#7c2d12,stroke:#fb923c,color:#fff
+    style M fill:#1e3a5f,stroke:#4fc3f7,color:#fff
+    style O fill:#7c2d12,stroke:#fb923c,color:#fff
+```
 
 ---
 
-## 🗄️ Database ER Diagram
+## 🗺️ ER Diagram
 
-The database architecture follows a **star schema** design optimized for analytical queries and dashboard performance.
-
-![ER Diagram](assets/er-diagram.png)
-
-**Database Tables:**
-- 📊 **Base Price Table**: Historical stock prices (OHLC data, adjusted close)
-- 🏢 **Company Fundamentals Table**: Financial metrics (P/E ratio, market cap, EPS, dividends)
-- 📈 **Volume Table**: Trading volume and liquidity metrics
-- 🌍 **Global Indices Table**: International market indices (S&P 500, NASDAQ, DOW, etc.)
-- 💬 **Sentiment Table**: Market sentiment scores and news analysis
-
----
-
-## 🚀 Project Workflow
-
-### 📥 Step 1: Data Collection
-**Description:**  
-Automated data pipeline collecting stock market data from multiple sources including financial APIs, market feeds, and news sentiment sources. Implements error handling, rate limiting, and data validation.
-
-**Technologies:** Python, Requests, BeautifulSoup, APIs  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/data-collection`](https://github.com/yourusername/project/tree/main/data-collection)
-
----
-
-### 🧹 Step 2: Data Cleaning
-**Description:**  
-Comprehensive data preprocessing pipeline handling missing values, outliers, duplicates, and data type conversions. Ensures data quality and consistency across all datasets.
-
-**Technologies:** Python, Pandas, NumPy  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/data-cleaning`](https://github.com/yourusername/project/tree/main/data-cleaning)
-
----
-
-### 🔧 Step 3: Feature Engineering
-**Description:**  
-Creation of advanced features including technical indicators (RSI, MACD, Bollinger Bands), moving averages, volatility metrics, and lag features for time series analysis.
-
-**Technologies:** Python, Pandas, TA-Lib  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/feature-engineering`](https://github.com/yourusername/project/tree/main/feature-engineering)
-
----
-
-### 🔍 Step 4: SQL Analysis
-**Description:**  
-Complex SQL queries for exploratory data analysis, trend identification, correlation analysis, and business intelligence. Includes stored procedures, views, and analytical functions.
-
-**Technologies:** SQL, MySQL/PostgreSQL  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/sql-analysis`](https://github.com/yourusername/project/tree/main/sql-analysis)
-
----
-
-### 🤖 Step 5: Machine Learning Model
-**Description:**  
-Development and training of predictive models for stock price forecasting. Includes model selection, hyperparameter tuning, cross-validation, and performance evaluation.
-
-**Technologies:** Python, Scikit-Learn, XGBoost, Random Forest  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/machine-learning`](https://github.com/yourusername/project/tree/main/machine-learning)
-
----
-
-### ⚡ Step 6: FastAPI Prediction API
-**Description:**  
-Production-ready RESTful API for real-time stock predictions. Implements authentication, rate limiting, error handling, and comprehensive API documentation.
-
-**Technologies:** FastAPI, Uvicorn, Pydantic  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/fastapi-prediction`](https://github.com/yourusername/project/tree/main/fastapi-prediction)
-
----
-
-### 📊 Step 7: Power BI Dashboard Files
-**Description:**  
-Interactive Power BI dashboards with advanced DAX calculations, custom visualizations, drill-through capabilities, and real-time data refresh.
-
-**Technologies:** Power BI, DAX, Power Query  
-**📂 GitHub Link:** [`https://github.com/yourusername/project/tree/main/powerbi-dashboards`](https://github.com/yourusername/project/tree/main/powerbi-dashboards)
-
----
-
-## 📊 Power BI Dashboard Showcase
+The data model is built on **5 core entity tables** connected through a clean relational schema, forming the backbone of both the SQL analysis layer and Power BI dashboards.
 
 <div align="center">
 
-### 🎨 Interactive Analytical Dashboards
+![ER Diagram](E-R%20Diagram.png)
+
+</div>
+
+### 🔗 Entity Relationships
+
+| Entity | Primary Key | Connects To | Relationship |
+|--------|------------|-------------|--------------|
+| **NSE Prices** (base_price) | `symbol + date` | Company Fundamentals | Many-to-One |
+| **Company Fundamentals** | `symbol` | NSE Prices, Volumes | One-to-Many |
+| **Daily Sentiment** | `symbol + date` | NSE Prices | Many-to-One |
+| **Global Indices** | `date` | NSE Prices | One-to-Many |
+| **Volumes** | `symbol + date` | NSE Prices | One-to-One |
+| **Macro Data** | `date` | NSE Prices | One-to-Many |
+
+> 📌 **Design Logic:** The `NSE Prices` table acts as the central **fact table**, with company, sentiment, volume, macro, and global data as **dimension tables** — a classic star schema optimized for analytical queries.
+
+---
+
+## 📊 Dashboard Showcase
+
+> **8 Power BI dashboards** built from SQL-connected live data, enabling cross-filtered intelligence across market segments.
+
+---
+
+### 🏠 Market Overview Dashboard
+<div align="center">
+
+![Market Overview](Dashboard/Market%20Overview.png)
 
 </div>
 
 ---
 
-#### 📈 Dashboard 1: Market Overview Dashboard
-*Comprehensive view of overall market performance with key metrics and trend indicators*
+### 🏢 Company Fundamentals Dashboard
+<div align="center">
 
-![Market Overview Dashboard](assets/dashboard1.png)
+![Company Fundamentals](Dashboard/Company%20Fundamentals.png)
 
-**Key Features:** Market indices comparison, daily gainers/losers, sector performance heatmap, volume trends
-
----
-
-#### 💹 Dashboard 2: Stock Price Dashboard
-*Detailed stock price analysis with historical trends and technical indicators*
-
-![Stock Price Dashboard](assets/dashboard2.png)
-
-**Key Features:** OHLC candlestick charts, moving averages, price volatility, comparative analysis
+</div>
 
 ---
 
-#### 📊 Dashboard 3: Volume Analysis Dashboard
-*Trading volume insights and liquidity metrics*
+### 📈 Stock Price Trend Dashboard
+<div align="center">
 
-![Volume Analysis Dashboard](assets/dashboard3.png)
+![Stock Price Trend](Dashboard/Stock%20Price%20Trend.png)
 
-**Key Features:** Volume trends, volume-price correlation, unusual volume detection, liquidity analysis
-
----
-
-#### 💬 Dashboard 4: Market Sentiment Dashboard
-*Sentiment analysis from news sources and social media*
-
-![Market Sentiment Dashboard](assets/dashboard4.png)
-
-**Key Features:** Sentiment score trends, news impact analysis, sentiment vs. price correlation
+</div>
 
 ---
 
-#### 🏢 Dashboard 5: Company Fundamentals Dashboard
-*Financial metrics and fundamental analysis*
+### 📦 Volume Analysis Dashboard
+<div align="center">
 
-![Company Fundamentals Dashboard](assets/dashboard5.png)
+![Volume Analysis](Dashboard/Volume%20Analysis%20Dashboard.png)
 
-**Key Features:** P/E ratios, market cap analysis, dividend yields, earnings trends, financial health scores
-
----
-
-#### 🌍 Dashboard 6: Global Market Dashboard
-*International market indices and global correlation analysis*
-
-![Global Market Dashboard](assets/dashboard6.png)
-
-**Key Features:** Global indices performance, cross-market correlations, regional heatmaps
+</div>
 
 ---
 
-#### 🔮 Dashboard 7: Prediction Dashboard
-*Machine learning predictions and forecast accuracy metrics*
+### 🧠 Market Sentiment Intelligence Dashboard
+<div align="center">
 
-![Prediction Dashboard](assets/dashboard7.png)
+![Market Sentiment](Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png)
 
-**Key Features:** Price predictions, confidence intervals, model accuracy metrics, prediction vs. actual
+</div>
 
 ---
 
-#### ⚖️ Dashboard 8: Risk & Return Dashboard
-*Portfolio risk analysis and return optimization*
+### 🌍 Global Market Intelligence Dashboard
+<div align="center">
 
-![Risk & Return Dashboard](assets/dashboard8.png)
+![Global Market](Dashboard/Global%20Market%20Intelligence%20Dashboard.png)
 
-**Key Features:** Risk-return scatter plots, Sharpe ratio, portfolio volatility, drawdown analysis
+</div>
+
+---
+
+### 🇮🇳 Indian Stock Market Intelligence & Analytics
+<div align="center">
+
+![Indian Market Intelligence](Dashboard/Indian%20Stock%20Market%20Intelligence%20%26%20Analytics.png)
+
+</div>
+
+---
+
+## 🚀 Step-by-Step Project Workflow
+
+### Step 1 — 🏗️ Dataset Creation Using Python
+**📁 Folder:** `CREATION_OF_DATASET_USING_PYTHON/`
+
+The dataset is **not collected from any external source**. It was entirely **synthesized using Python** to simulate real NSE stock market behavior — including OHLCV prices, company fundamentals, macro indicators, trading volumes, and news sentiment signals.
+
+```
+CREATION_OF_DATASET_USING_PYTHON/
+└── Stock_Market_Prediction.py       ← Master dataset generation script
+```
+
+---
+
+### Step 2 — 🗂️ Raw Dataset Storage
+**📁 Folder:** `stock_market_unclean_dataset/`
+
+The generated raw data is organized into **6 domain-specific subdirectories**, mimicking real-world data lake structure.
+
+```
+stock_market_unclean_dataset/
+├── raw_data/          ← Core OHLCV price data
+├── company_data/      ← Fundamentals (P/E, EPS, Market Cap, etc.)
+├── macro_data/        ← Inflation, interest rates, GDP data
+├── trading_data/      ← Intraday trading volumes
+├── news_sentiment/    ← Sentiment scores per stock per day
+└── metadata/          ← Ticker symbols, sector mappings
+```
+
+---
+
+### Step 3 — 🧹 Data Cleaning Using Python
+**📁 Folder:** `Cleaning_Code/`
+
+**8 dedicated Jupyter notebooks** handle cleaning for each data domain separately — ensuring precision without cross-contamination.
+
+```
+Cleaning_Code/
+├── basa_price_cleaning.ipynb         ← Base price OHLCV cleaning
+├── nse_price_cleaning.ipynb          ← NSE-specific price normalization
+├── company_data_cleaning.ipynb       ← Fundamentals cleaning & outlier handling
+├── macro_data_cleaning.ipynb         ← Macro indicator smoothing
+├── meta_data_cleaning.ipynb          ← Symbol & metadata standardization
+├── news_sentiment.ipynb              ← Sentiment score normalization
+├── global_indices_cleaning.ipynb     ← International index alignment
+└── volume_cleaning.ipynb             ← Volume anomaly detection & fixing
+```
+
+> Each notebook handles: null treatment, type casting, outlier handling, date normalization, and domain-specific business rules.
+
+---
+
+### Step 4 — ⚙️ Feature Engineering
+Performed **within the cleaning notebooks**, adding derived columns like:
+- 📐 Moving averages (5-day, 20-day, 50-day)
+- 📉 Daily returns & volatility scores
+- 📊 RSI, MACD signals
+- 💬 Sentiment rolling averages
+- 🌏 Global index correlation features
+- 🏭 Sector-based normalization
+
+---
+
+### Step 5 — 📁 Clean Dataset Storage
+**📁 Folder:** `stock_market_clean_dataset_with_Feature_Eng/`
+
+Post-cleaning, all data consolidates into **7 structured CSV files**, ready for SQL ingestion and ML training.
+
+```
+stock_market_clean_dataset_with_Feature_Eng/
+├── base_price.csv               ← Clean OHLCV base prices
+├── nse_prices.csv               ← NSE-specific cleaned prices
+├── company_fundamentals.csv     ← P/E, EPS, Market Cap, Book Value
+├── daily_sentiment.csv          ← Daily sentiment scores per symbol
+├── global_indices.csv           ← Global market index data
+├── inflation_interest.csv       ← Macro economic indicators
+└── volumes.csv                  ← Daily trading volumes
+```
+
+---
+
+### Step 6 — 🗄️ SQL Analysis
+**📁 Folder:** `SQL/`
+
+```
+SQL/
+├── DATA_IMPORTING_CODE.sql       ← Bulk imports all 7 CSVs into SQL tables
+├── SQL Data Mart.sql             ← Creates star schema Data Mart
+└── QUESTION_WITH_SOLUTION.sql    ← 20+ business analytical queries
+```
+
+**Highlights:**
+- ✅ All 7 clean CSVs imported into SQL relational database
+- ✅ Data Mart designed with fact + dimension table architecture
+- ✅ 20+ real-world analytical queries covering sector performance, volatility ranking, sentiment impact, volume anomalies, macro correlation, and more
+
+---
+
+### Step 7 — 🤖 Machine Learning Model
+**📁 Folder:** `ML Model/`
+
+```
+ML Model/
+├── train_model.py         ← Model training pipeline (Scikit-Learn)
+├── predict.py             ← Standalone prediction logic
+├── app.py                 ← FastAPI application server
+├── stock_model.pkl        ← Trained ML model (serialized)
+└── company_encoder.pkl    ← Label encoder for company symbols
+```
+
+---
+
+### Step 8 — 🌐 Frontend Application
+**📁 Folder:** `frontend/`
+
+```
+frontend/
+├── index.html     ← Main prediction UI
+├── script.js      ← API call logic & result rendering
+└── style.css      ← Styling & responsive layout
+```
+
+---
+
+### Step 9 — 📊 Power BI Dashboards
+**📁 Folder:** `Dashboard/`
+
+```
+Dashboard/
+├── Market Overview.png
+├── Company Fundamentals.png
+├── Stock Price Trend.png
+├── Volume Analysis Dashboard.png
+├── Market Sentiment Intelligence Dashboard.png
+├── Global Market Intelligence Dashboard.png
+└── Indian Stock Market Intelligence & Analytics.png
+```
+
+**Power BI File:** `Stock Market Prediction.pbix`
+
+---
+
+## 🗄️ SQL Analysis Deep Dive
+
+The SQL layer is the analytical engine of this project, enabling structured business intelligence over the cleaned dataset.
+
+### 📥 Data Import Strategy
+All 7 cleaned CSV files are loaded into SQL Server using `DATA_IMPORTING_CODE.sql`, creating properly typed relational tables with primary and foreign key constraints.
+
+### 🏗️ Data Mart Architecture
+`SQL Data Mart.sql` builds a **star schema** with:
+- **Fact Table:** `fact_stock_prices` — daily price + volume records
+- **Dimension Tables:** `dim_company`, `dim_date`, `dim_sentiment`, `dim_macro`, `dim_global`
+
+### 🔍 20+ Analytical SQL Queries — Sample Topics
+
+| # | Query Topic |
+|---|-------------|
+| 1 | Top 10 stocks by average daily return |
+| 2 | Sector-wise performance comparison |
+| 3 | Stocks with highest volatility (std dev of returns) |
+| 4 | Sentiment vs. price movement correlation |
+| 5 | Volume anomaly detection (>2x average) |
+| 6 | 52-week high/low breaches |
+| 7 | Macro interest rate vs. market index movement |
+| 8 | Most consistent performers (low drawdown) |
+| 9 | Global index impact on NSE movement |
+| 10 | Month-over-month growth ranking |
+| 11–20+ | Moving average crossovers, EPS vs stock return, sentiment heatmaps, etc. |
 
 ---
 
 ## 🤖 Machine Learning Model
 
-### Model Architecture
+### 🎯 Model Objective
+Predict the **next-day closing price** (or directional movement) of NSE-listed stocks based on historical patterns, macro signals, and sentiment features.
 
-The prediction system employs an **ensemble learning approach** combining multiple algorithms for robust forecasting:
+### 🧬 Feature Set Used
+- Historical OHLCV data (lagged features)
+- Rolling moving averages (5/20/50-day)
+- RSI & MACD technical indicators
+- Daily sentiment scores (rolling 3-day)
+- Macro: inflation rate, interest rate
+- Global index returns (S&P 500, DAX, Nikkei proxies)
 
-**Model Purpose:**  
-Predict future stock prices and trend directions using historical data, technical indicators, and market sentiment.
+### 🛠️ Pipeline
+```
+Clean CSV Data
+     ↓
+Feature Matrix Construction (train_model.py)
+     ↓
+Train/Test Split (80/20)
+     ↓
+Scikit-Learn Model Training
+     ↓
+Evaluation (MAE, RMSE, R²)
+     ↓
+Serialization → stock_model.pkl + company_encoder.pkl
+     ↓
+FastAPI Integration (app.py)
+     ↓
+Frontend API Calls (script.js)
+```
 
-**Features Used:**
-- 📊 Historical price data (OHLC, adjusted close)
-- 📈 Technical indicators (RSI, MACD, Bollinger Bands, Moving Averages)
-- 📉 Volatility metrics and momentum indicators
-- 🏢 Company fundamental ratios
-- 💬 Market sentiment scores
-- 🌍 Global market indices
-- 📊 Volume and liquidity metrics
-
-**Prediction Goals:**
-- Next-day price prediction
-- Weekly trend direction
-- Volatility forecasting
-- Buy/Sell signal generation
-
-**Model Performance:**
-- Cross-validation with time-series split
-- Backtesting on historical data
-- Performance metrics: RMSE, MAE, R²
-- Feature importance analysis
-
----
-
-## ⚡ FastAPI Prediction System
-
-### Real-Time Prediction API
-
-The FastAPI service provides a **production-grade RESTful API** for accessing machine learning predictions.
-
-**Key Features:**
-- 🚀 **High Performance**: Asynchronous request handling with sub-second response times
-- 🔐 **Secure**: API key authentication and rate limiting
-- 📝 **Auto-Documentation**: Interactive Swagger UI and ReDoc
-- ✅ **Validation**: Pydantic models for request/response validation
-- 🔄 **Real-Time**: Live predictions with latest market data
-- 📊 **Multiple Endpoints**: 
-  - `/predict` - Single stock prediction
-  - `/batch-predict` - Multiple stock predictions
-  - `/trend` - Trend direction forecast
-  - `/health` - API health check
-
-**API Response Example:**
-```json
+### ⚡ FastAPI Prediction Endpoint
+```python
+POST /predict
 {
-  "stock_symbol": "AAPL",
-  "current_price": 175.43,
-  "predicted_price": 178.92,
-  "confidence": 0.87,
-  "trend": "bullish",
-  "recommendation": "buy"
+  "symbol": "RELIANCE",
+  "open": 2450.0,
+  "high": 2490.0,
+  "low": 2430.0,
+  "volume": 1200000,
+  "sentiment": 0.65,
+  "rsi": 58.2
 }
+
+→ Response: { "predicted_close": 2478.5, "confidence": 0.87 }
 ```
 
 ---
 
-## 💡 Key Insights
+## 📊 Power BI Integration
 
-### Data-Driven Market Intelligence
+### 🔌 SQL → Power BI Connection
+- Power BI Desktop connected directly to **SQL Server** using native connector
+- **DirectQuery / Import mode** for live or cached data
+- Relationships established mirroring the SQL Data Mart star schema
 
-✅ **Market Trend Analysis**
-- Identification of bullish and bearish patterns across multiple timeframes
-- Sector rotation analysis and leading indicators
-- Support and resistance level detection
+### 📋 Dashboards Built
 
-✅ **Volume Analysis**
-- Correlation between volume spikes and price movements
-- Detection of institutional buying/selling patterns
-- Liquidity risk assessment
+| Dashboard | Key Metrics |
+|-----------|-------------|
+| 🏠 Market Overview | Index movement, daily gainers/losers, market breadth |
+| 🏢 Company Fundamentals | P/E ratio, EPS, Market Cap, Book Value trends |
+| 📈 Stock Price Trend | OHLCV candlesticks, moving averages, YTD performance |
+| 📦 Volume Analysis | Volume spikes, liquidity heatmap, delivery % |
+| 🧠 Market Sentiment | Sentiment scores, news impact, bullish/bearish gauge |
+| 🌍 Global Market Intelligence | S&P 500 / DAX / Nikkei correlation with NSE |
+| 🇮🇳 Indian Market Analytics | Sector rotation, index composition, FII/DII flows |
 
-✅ **Sentiment Impact**
-- Quantified relationship between news sentiment and stock performance
-- Early warning signals from sentiment shifts
-- Social media sentiment integration
+> **Business Value:** The dashboards enable data-driven decisions by revealing hidden patterns in market sentiment, macro-economic impact, and sector rotation behavior.
 
-✅ **Prediction Capability**
-- 85%+ accuracy on trend direction prediction
-- Reliable short-term price forecasting
-- Risk-adjusted return optimization
+---
 
-✅ **Portfolio Optimization**
-- Diversification recommendations based on correlation analysis
-- Risk-return trade-off visualization
-- Sector allocation strategies
+## 🗂️ Repository Structure
+
+```
+Stock-Market-Prediction/
+│
+├── 📂 CREATION_OF_DATASET_USING_PYTHON/
+│   └── Stock_Market_Prediction.py        ← Dataset generation script
+│
+├── 📂 stock_market_unclean_dataset/
+│   ├── raw_data/                         ← Core OHLCV raw data
+│   ├── company_data/                     ← Company fundamentals
+│   ├── macro_data/                       ← Macro economic data
+│   ├── trading_data/                     ← Trading volume data
+│   ├── news_sentiment/                   ← News sentiment data
+│   └── metadata/                         ← Ticker metadata
+│
+├── 📂 Cleaning_Code/
+│   ├── basa_price_cleaning.ipynb
+│   ├── company_data_cleaning.ipynb
+│   ├── global_indices_cleaning.ipynb
+│   ├── macro_data_cleaning.ipynb
+│   ├── meta_data_cleaning.ipynb
+│   ├── news_sentiment.ipynb
+│   ├── nse_price_cleaning.ipynb
+│   └── volume_cleaning.ipynb
+│
+├── 📂 stock_market_clean_dataset_with_Feature_Eng/
+│   ├── base_price.csv
+│   ├── company_fundamentals.csv
+│   ├── daily_sentiment.csv
+│   ├── global_indices.csv
+│   ├── inflation_interest.csv
+│   ├── nse_prices.csv
+│   └── volumes.csv
+│
+├── 📂 SQL/
+│   ├── DATA_IMPORTING_CODE.sql           ← CSV import scripts
+│   ├── SQL Data Mart.sql                 ← Star schema creation
+│   └── QUESTION_WITH_SOLUTION.sql        ← 20+ analytical queries
+│
+├── 📂 ML Model/
+│   ├── train_model.py                    ← ML training pipeline
+│   ├── predict.py                        ← Prediction logic
+│   ├── app.py                            ← FastAPI server
+│   ├── stock_model.pkl                   ← Serialized ML model
+│   └── company_encoder.pkl               ← Label encoder
+│
+├── 📂 frontend/
+│   ├── index.html                        ← Web interface
+│   ├── script.js                         ← API integration
+│   └── style.css                         ← Styling
+│
+├── 📂 Dashboard/
+│   ├── Market Overview.png
+│   ├── Company Fundamentals.png
+│   ├── Stock Price Trend.png
+│   ├── Volume Analysis Dashboard.png
+│   ├── Market Sentiment Intelligence Dashboard.png
+│   ├── Global Market Intelligence Dashboard.png
+│   └── Indian Stock Market Intelligence & Analytics.png
+│
+├── 🗺️ E-R Diagram.png                   ← Entity-Relationship Diagram
+├── 📊 Stock Market Prediction.pbix       ← Power BI report file
+└── 📄 README.md
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-<div align="center">
-
-| Category | Technologies |
-|----------|-------------|
-| **Programming** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) |
-| **Database** | ![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white) |
-| **Visualization** | ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black) |
-| **API Framework** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) |
-| **Machine Learning** | ![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=flat-square) |
-| **Data Processing** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white) |
-| **Version Control** | ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) |
-
-</div>
+| Category | Technology | Purpose |
+|----------|-----------|---------|
+| **Language** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) | Dataset creation, cleaning, ML |
+| **Data Manipulation** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) | Data transformation & feature engineering |
+| **Machine Learning** | ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikitlearn&logoColor=white) | Model training & prediction |
+| **API Framework** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) | Prediction REST API |
+| **Database** | ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white) | Data storage & analytical queries |
+| **BI & Visualization** | ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat&logo=powerbi&logoColor=black) | Interactive dashboards |
+| **Notebooks** | ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat&logo=jupyter&logoColor=white) | Data cleaning & EDA |
+| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) | Web prediction interface |
+| **Model Serialization** | Pickle (`.pkl`) | Save & load trained models |
 
 ---
 
-## 🌟 Project Highlights
-
-<div align="center">
-
-| Feature | Description |
-|---------|-------------|
-| 🔄 **End-to-End Pipeline** | Complete data workflow from collection to visualization |
-| 🤖 **ML Prediction System** | Advanced ensemble models for accurate forecasting |
-| 📊 **8 Power BI Dashboards** | Comprehensive analytical views for decision-making |
-| 🔍 **SQL Analysis** | Complex queries and stored procedures for insights |
-| ⚡ **Prediction API** | Production-ready FastAPI with real-time predictions |
-| 📈 **Technical Indicators** | 15+ technical indicators for trend analysis |
-| 🌍 **Global Market Data** | Integration of international market indices |
-| 💬 **Sentiment Analysis** | News and social media sentiment integration |
-| 🎯 **95% Data Quality** | Robust cleaning and validation pipeline |
-| 📱 **Scalable Architecture** | Modular design for easy expansion |
-
-</div>
-
----
-
-## 📁 Repository Structure
-```
-stock-market-intelligence/
-│
-├── 📥 data-collection/
-│   ├── api_collectors.py
-│   ├── web_scrapers.py
-│   └── data_sources.md
-│
-├── 🧹 data-cleaning/
-│   ├── cleaning_pipeline.py
-│   ├── validation_rules.py
-│   └── quality_reports.ipynb
-│
-├── 🔧 feature-engineering/
-│   ├── technical_indicators.py
-│   ├── feature_creation.py
-│   └── feature_selection.ipynb
-│
-├── 🔍 sql-analysis/
-│   ├── schema.sql
-│   ├── analytical_queries.sql
-│   └── stored_procedures.sql
-│
-├── 🤖 machine-learning/
-│   ├── model_training.py
-│   ├── hyperparameter_tuning.py
-│   ├── model_evaluation.ipynb
-│   └── saved_models/
-│
-├── ⚡ fastapi-prediction/
-│   ├── main.py
-│   ├── models.py
-│   ├── routers/
-│   └── requirements.txt
-│
-├── 📊 powerbi-dashboards/
-│   ├── dashboard1_market_overview.pbix
-│   ├── dashboard2_stock_price.pbix
-│   ├── dashboard3_volume_analysis.pbix
-│   ├── dashboard4_sentiment.pbix
-│   ├── dashboard5_fundamentals.pbix
-│   ├── dashboard6_global_market.pbix
-│   ├── dashboard7_predictions.pbix
-│   └── dashboard8_risk_return.pbix
-│
-├── 📷 assets/
-│   ├── er-diagram.png
-│   └── dashboard screenshots/
-│
-└── 📖 README.md
-```
-
----
-
-## 👨‍💻 Author
+## 👤 Author
 
 <div align="center">
 
-### **Harsh Soni**
-*Data Analyst | Business Intelligence | Machine Learning*
+<img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100" style="border-radius:50%" alt="Harsh Soni"/>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/harsh-soni-data-analyst)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+### Harsh Soni
+**Data Analyst**
 
----
+*Passionate about transforming raw data into actionable intelligence through end-to-end analytical pipelines.*
 
-### 📫 Let's Connect!
-
-Interested in collaboration or have questions about this project?  
-Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/harsh-soni-data-analyst)
-
----
-
-⭐ **If you found this project interesting, please consider giving it a star!** ⭐
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/harsh-soni-data-analyst)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
 </div>
 
@@ -464,8 +527,10 @@ Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/harsh-soni-dat
 
 <div align="center">
 
-**© 2024 Harsh Soni | Stock Market Intelligence System**
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:0f3460,50:16213e,100:1a1a2e&height=100&section=footer)
 
-*Built with 💙 using Python, SQL, Power BI, and Machine Learning*
+**⭐ If you found this project helpful, please consider giving it a star!**
+
+*Built with ❤️ by Harsh Soni — Data never lies, but it needs the right analyst to speak.*
 
 </div>
