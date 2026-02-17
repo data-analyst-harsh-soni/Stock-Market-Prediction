@@ -131,15 +131,15 @@ The data model is built on **5 core entity tables** connected through a clean re
 <img src="Dashboard/Volume%20Analysis%20Dashboard.png" width="900">
 <br><br>
 
-<h2>🧠 Market Sentiment Intelligence Dashboard</h2>
+<h2>🧠 Market Sentiment Dashboard</h2>
 <img src="Dashboard/Market%20Sentiment%20Intelligence%20Dashboard.png" width="900">
 <br><br>
 
-<h2>🌍 Global Market Intelligence Dashboard</h2>
+<h2>🌍 Global Market Dashboard</h2>
 <img src="Dashboard/Global%20Market%20Intelligence%20Dashboard.png" width="900">
 <br><br>
 
-<h2>🇮🇳 Indian Stock Market Intelligence & Analytics</h2>
+<h2>🇮🇳 Indian Market Dashboard</h2>
 <img src="Dashboard/Indian%20Stock%20Market%20Intelligence%20%26%20Analytics.png" width="900">
 
 </div>
